@@ -1,0 +1,2023 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OSAAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcademicInformations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
+          <Property Name="EducationLevelId" Type="int" Nullable="false" />
+          <Property Name="GaduationYear" Type="date" Nullable="false" />
+          <Property Name="InstructorId" Type="int" Nullable="false" />
+          <Property Name="FieldOfStudiesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AcademicInstutions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstitutionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActiveInstructors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstructorId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdmissionTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdmissionTypeName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdvisorDocuments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectAdvisorId" Type="int" Nullable="false" />
+          <Property Name="DocumentTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Attachement" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="AdvisorTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Batches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="ProgramId" Type="int" Nullable="false" />
+          <Property Name="AdmissionId" Type="int" Nullable="false" />
+          <Property Name="EntryYear" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EducationLevels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FieldOfStudies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinalProjectAdvisors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FinalProjectId" Type="int" Nullable="false" />
+          <Property Name="InstractorId" Type="int" Nullable="false" />
+          <Property Name="AdvisorTypeId" Type="int" Nullable="false" />
+          <Property Name="IsTerminated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinalProjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="NoOfStudents" Type="int" />
+          <Property Name="IsTerminated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FinalProjectStudents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FinalProjectId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="IsTerminated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstractorRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="InstractorId" Type="int" Nullable="false" />
+          <Property Name="IsOnPosition" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstructorFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstructorId" Type="int" Nullable="false" />
+          <Property Name="FeedbackContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FeedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstructorImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+          <Property Name="BackgroundImage" Type="nvarchar(max)" />
+          <Property Name="ProfilePictureURL" Type="nvarchar(max)" />
+          <Property Name="ActiveProfilePicture" Type="bit" />
+          <Property Name="ActiveBackgroundImage" Type="bit" />
+          <Property Name="InstructorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instructors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SelectedAdvisors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="InstructorId" Type="int" Nullable="false" />
+          <Property Name="IsSelected" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentBatches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="BatchId" Type="int" Nullable="false" />
+          <Property Name="Section" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentDocuments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectStudentId" Type="int" Nullable="false" />
+          <Property Name="DocumentTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="UploadDate" Type="date" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Attachement" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="StudentFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="FeedbackContent" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FeedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BackgroundImage" Type="nvarchar(max)" />
+          <Property Name="ProfilePictureURL" Type="nvarchar(max)" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="UplaodDate" Type="datetime" Nullable="false" />
+          <Property Name="ActiveProfilePicture" Type="bit" />
+          <Property Name="ActiveBackgroundImage" Type="bit" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdNumber" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemAdminImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BackgroundImage" Type="nvarchar(max)" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+          <Property Name="ProfilePictureURL" Type="nvarchar(max)" />
+          <Property Name="ActiveProfilePicture" Type="bit" />
+          <Property Name="ActiveBackgroundImage" Type="bit" />
+          <Property Name="SystemAdminId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemAdministratorInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemAdmins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="AdminId" Type="int" Nullable="false" />
+          <Property Name="IsOnPosition" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AcademicInformations_AcademicInstutions">
+          <End Role="AcademicInstutions" Type="Self.AcademicInstutions" Multiplicity="1" />
+          <End Role="AcademicInformations" Type="Self.AcademicInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicInstutions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformations">
+              <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInformations_EducationLevels">
+          <End Role="EducationLevels" Type="Self.EducationLevels" Multiplicity="1" />
+          <End Role="AcademicInformations" Type="Self.AcademicInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformations">
+              <PropertyRef Name="EducationLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInformations_FieldOfStudies">
+          <End Role="FieldOfStudies" Type="Self.FieldOfStudies" Multiplicity="1" />
+          <End Role="AcademicInformations" Type="Self.AcademicInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOfStudies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformations">
+              <PropertyRef Name="FieldOfStudiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInformations_Instructors">
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="1" />
+          <End Role="AcademicInformations" Type="Self.AcademicInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformations">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInstutions_Countries1">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="AcademicInstutions" Type="Self.AcademicInstutions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInstutions">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveInstructors_ActiveInstructors">
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="1" />
+          <End Role="ActiveInstructors" Type="Self.ActiveInstructors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActiveInstructors">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdvisorDocuments_FinalProjectAdvisors1">
+          <End Role="FinalProjectAdvisors" Type="Self.FinalProjectAdvisors" Multiplicity="1" />
+          <End Role="AdvisorDocuments" Type="Self.AdvisorDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProjectAdvisors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdvisorDocuments">
+              <PropertyRef Name="ProjectAdvisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_AdmissionTypes">
+          <End Role="AdmissionTypes" Type="Self.AdmissionTypes" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdmissionTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="AdmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_Programs">
+          <End Role="Programs" Type="Self.Programs" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectAdvisors_AdvisorTypes1">
+          <End Role="AdvisorTypes" Type="Self.AdvisorTypes" Multiplicity="1" />
+          <End Role="FinalProjectAdvisors" Type="Self.FinalProjectAdvisors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdvisorTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectAdvisors">
+              <PropertyRef Name="AdvisorTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectAdvisors_FinalProjects">
+          <End Role="FinalProjects" Type="Self.FinalProjects" Multiplicity="1" />
+          <End Role="FinalProjectAdvisors" Type="Self.FinalProjectAdvisors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectAdvisors">
+              <PropertyRef Name="FinalProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectAdvisors_Instructors">
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="1" />
+          <End Role="FinalProjectAdvisors" Type="Self.FinalProjectAdvisors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectAdvisors">
+              <PropertyRef Name="InstractorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjects_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="FinalProjects" Type="Self.FinalProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjects">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectStudents_FinalProjects">
+          <End Role="FinalProjects" Type="Self.FinalProjects" Multiplicity="1" />
+          <End Role="FinalProjectStudents" Type="Self.FinalProjectStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectStudents">
+              <PropertyRef Name="FinalProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectStudents_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="FinalProjectStudents" Type="Self.FinalProjectStudents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectStudents">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstractorRole_Instructors">
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="1" />
+          <End Role="InstractorRole" Type="Self.InstractorRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstractorRole">
+              <PropertyRef Name="InstractorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstractorRole_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="InstractorRole" Type="Self.InstractorRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstractorRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorFeedback_Instructors">
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="1" />
+          <End Role="InstructorFeedback" Type="Self.InstructorFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstructorFeedback">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorImages_Instructors">
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="1" />
+          <End Role="InstructorImages" Type="Self.InstructorImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstructorImages">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Instructors_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Instructors">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SelectedAdvisors_Instructors">
+          <End Role="Instructors" Type="Self.Instructors" Multiplicity="1" />
+          <End Role="SelectedAdvisors" Type="Self.SelectedAdvisors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectedAdvisors">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SelectedAdvisors_SelectedAdvisors">
+          <End Role="FinalProjects" Type="Self.FinalProjects" Multiplicity="1" />
+          <End Role="SelectedAdvisors" Type="Self.SelectedAdvisors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectedAdvisors">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentBatches_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="StudentBatches" Type="Self.StudentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentBatches">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentBatches_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentBatches" Type="Self.StudentBatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentBatches">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_FinalProjectStudents">
+          <End Role="FinalProjectStudents" Type="Self.FinalProjectStudents" Multiplicity="1" />
+          <End Role="StudentDocuments" Type="Self.StudentDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProjectStudents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentDocuments">
+              <PropertyRef Name="ProjectStudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeedback_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentFeedback" Type="Self.StudentFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentFeedback">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentImages_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentImages" Type="Self.StudentImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentImages">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemAdminImages_SystemAdministratorInformation">
+          <End Role="SystemAdministratorInformation" Type="Self.SystemAdministratorInformation" Multiplicity="1" />
+          <End Role="SystemAdminImages" Type="Self.SystemAdminImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemAdministratorInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemAdminImages">
+              <PropertyRef Name="SystemAdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemAdmins_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="SystemAdmins" Type="Self.SystemAdmins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemAdmins">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemAdmins_SystemAdministratorInformation">
+          <End Role="SystemAdministratorInformation" Type="Self.SystemAdministratorInformation" Multiplicity="1" />
+          <End Role="SystemAdmins" Type="Self.SystemAdmins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemAdministratorInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemAdmins">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OSAAModelStoreContainer">
+          <EntitySet Name="AcademicInformations" EntityType="Self.AcademicInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicInstutions" EntityType="Self.AcademicInstutions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActiveInstructors" EntityType="Self.ActiveInstructors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdmissionTypes" EntityType="Self.AdmissionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdvisorDocuments" EntityType="Self.AdvisorDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdvisorTypes" EntityType="Self.AdvisorTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducationLevels" EntityType="Self.EducationLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FieldOfStudies" EntityType="Self.FieldOfStudies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinalProjectAdvisors" EntityType="Self.FinalProjectAdvisors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinalProjects" EntityType="Self.FinalProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinalProjectStudents" EntityType="Self.FinalProjectStudents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstractorRole" EntityType="Self.InstractorRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstructorFeedback" EntityType="Self.InstructorFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstructorImages" EntityType="Self.InstructorImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instructors" EntityType="Self.Instructors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programs" EntityType="Self.Programs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SelectedAdvisors" EntityType="Self.SelectedAdvisors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentBatches" EntityType="Self.StudentBatches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentDocuments" EntityType="Self.StudentDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentFeedback" EntityType="Self.StudentFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentImages" EntityType="Self.StudentImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemAdminImages" EntityType="Self.SystemAdminImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemAdministratorInformation" EntityType="Self.SystemAdministratorInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemAdmins" EntityType="Self.SystemAdmins" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AcademicInformations_AcademicInstutions" Association="Self.FK_AcademicInformations_AcademicInstutions">
+            <End Role="AcademicInstutions" EntitySet="AcademicInstutions" />
+            <End Role="AcademicInformations" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInformations_EducationLevels" Association="Self.FK_AcademicInformations_EducationLevels">
+            <End Role="EducationLevels" EntitySet="EducationLevels" />
+            <End Role="AcademicInformations" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInformations_FieldOfStudies" Association="Self.FK_AcademicInformations_FieldOfStudies">
+            <End Role="FieldOfStudies" EntitySet="FieldOfStudies" />
+            <End Role="AcademicInformations" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInformations_Instructors" Association="Self.FK_AcademicInformations_Instructors">
+            <End Role="Instructors" EntitySet="Instructors" />
+            <End Role="AcademicInformations" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInstutions_Countries1" Association="Self.FK_AcademicInstutions_Countries1">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="AcademicInstutions" EntitySet="AcademicInstutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveInstructors_ActiveInstructors" Association="Self.FK_ActiveInstructors_ActiveInstructors">
+            <End Role="Instructors" EntitySet="Instructors" />
+            <End Role="ActiveInstructors" EntitySet="ActiveInstructors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdvisorDocuments_FinalProjectAdvisors1" Association="Self.FK_AdvisorDocuments_FinalProjectAdvisors1">
+            <End Role="FinalProjectAdvisors" EntitySet="FinalProjectAdvisors" />
+            <End Role="AdvisorDocuments" EntitySet="AdvisorDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_AdmissionTypes" Association="Self.FK_Batches_AdmissionTypes">
+            <End Role="AdmissionTypes" EntitySet="AdmissionTypes" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_Departments" Association="Self.FK_Batches_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_Programs" Association="Self.FK_Batches_Programs">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectAdvisors_AdvisorTypes1" Association="Self.FK_FinalProjectAdvisors_AdvisorTypes1">
+            <End Role="AdvisorTypes" EntitySet="AdvisorTypes" />
+            <End Role="FinalProjectAdvisors" EntitySet="FinalProjectAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectAdvisors_FinalProjects" Association="Self.FK_FinalProjectAdvisors_FinalProjects">
+            <End Role="FinalProjects" EntitySet="FinalProjects" />
+            <End Role="FinalProjectAdvisors" EntitySet="FinalProjectAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectAdvisors_Instructors" Association="Self.FK_FinalProjectAdvisors_Instructors">
+            <End Role="Instructors" EntitySet="Instructors" />
+            <End Role="FinalProjectAdvisors" EntitySet="FinalProjectAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjects_Students" Association="Self.FK_FinalProjects_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="FinalProjects" EntitySet="FinalProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectStudents_FinalProjects" Association="Self.FK_FinalProjectStudents_FinalProjects">
+            <End Role="FinalProjects" EntitySet="FinalProjects" />
+            <End Role="FinalProjectStudents" EntitySet="FinalProjectStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectStudents_Students" Association="Self.FK_FinalProjectStudents_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="FinalProjectStudents" EntitySet="FinalProjectStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstractorRole_Instructors" Association="Self.FK_InstractorRole_Instructors">
+            <End Role="Instructors" EntitySet="Instructors" />
+            <End Role="InstractorRole" EntitySet="InstractorRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstractorRole_Roles" Association="Self.FK_InstractorRole_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="InstractorRole" EntitySet="InstractorRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorFeedback_Instructors" Association="Self.FK_InstructorFeedback_Instructors">
+            <End Role="Instructors" EntitySet="Instructors" />
+            <End Role="InstructorFeedback" EntitySet="InstructorFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorImages_Instructors" Association="Self.FK_InstructorImages_Instructors">
+            <End Role="Instructors" EntitySet="Instructors" />
+            <End Role="InstructorImages" EntitySet="InstructorImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Instructors_Departments" Association="Self.FK_Instructors_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Instructors" EntitySet="Instructors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SelectedAdvisors_Instructors" Association="Self.FK_SelectedAdvisors_Instructors">
+            <End Role="Instructors" EntitySet="Instructors" />
+            <End Role="SelectedAdvisors" EntitySet="SelectedAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SelectedAdvisors_SelectedAdvisors" Association="Self.FK_SelectedAdvisors_SelectedAdvisors">
+            <End Role="FinalProjects" EntitySet="FinalProjects" />
+            <End Role="SelectedAdvisors" EntitySet="SelectedAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentBatches_Batches" Association="Self.FK_StudentBatches_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="StudentBatches" EntitySet="StudentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentBatches_Students" Association="Self.FK_StudentBatches_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentBatches" EntitySet="StudentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_FinalProjectStudents" Association="Self.FK_StudentDocuments_FinalProjectStudents">
+            <End Role="FinalProjectStudents" EntitySet="FinalProjectStudents" />
+            <End Role="StudentDocuments" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeedback_Students" Association="Self.FK_StudentFeedback_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentFeedback" EntitySet="StudentFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentImages_Students" Association="Self.FK_StudentImages_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentImages" EntitySet="StudentImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemAdminImages_SystemAdministratorInformation" Association="Self.FK_SystemAdminImages_SystemAdministratorInformation">
+            <End Role="SystemAdministratorInformation" EntitySet="SystemAdministratorInformation" />
+            <End Role="SystemAdminImages" EntitySet="SystemAdminImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemAdmins_Roles" Association="Self.FK_SystemAdmins_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="SystemAdmins" EntitySet="SystemAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemAdmins_SystemAdministratorInformation" Association="Self.FK_SystemAdmins_SystemAdministratorInformation">
+            <End Role="SystemAdministratorInformation" EntitySet="SystemAdministratorInformation" />
+            <End Role="SystemAdmins" EntitySet="SystemAdmins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OSAAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OSAAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AcademicInformations" EntityType="OSAAModel.AcademicInformation" />
+          <EntitySet Name="AcademicInstutions" EntityType="OSAAModel.AcademicInstution" />
+          <EntitySet Name="ActiveInstructors" EntityType="OSAAModel.ActiveInstructor" />
+          <EntitySet Name="AdmissionTypes" EntityType="OSAAModel.AdmissionType" />
+          <EntitySet Name="AdvisorDocuments" EntityType="OSAAModel.AdvisorDocument" />
+          <EntitySet Name="AdvisorTypes" EntityType="OSAAModel.AdvisorType" />
+          <EntitySet Name="Batches" EntityType="OSAAModel.Batch" />
+          <EntitySet Name="Countries" EntityType="OSAAModel.Country" />
+          <EntitySet Name="Departments" EntityType="OSAAModel.Department" />
+          <EntitySet Name="EducationLevels" EntityType="OSAAModel.EducationLevel" />
+          <EntitySet Name="FieldOfStudies" EntityType="OSAAModel.FieldOfStudy" />
+          <EntitySet Name="FinalProjectAdvisors" EntityType="OSAAModel.FinalProjectAdvisor" />
+          <EntitySet Name="FinalProjects" EntityType="OSAAModel.FinalProject" />
+          <EntitySet Name="FinalProjectStudents" EntityType="OSAAModel.FinalProjectStudent" />
+          <EntitySet Name="InstractorRoles" EntityType="OSAAModel.InstractorRole" />
+          <EntitySet Name="InstructorFeedbacks" EntityType="OSAAModel.InstructorFeedback" />
+          <EntitySet Name="Instructors" EntityType="OSAAModel.Instructor" />
+          <EntitySet Name="Programs" EntityType="OSAAModel.Program" />
+          <EntitySet Name="Roles" EntityType="OSAAModel.Role" />
+          <EntitySet Name="SelectedAdvisors" EntityType="OSAAModel.SelectedAdvisor" />
+          <EntitySet Name="StudentBatches" EntityType="OSAAModel.StudentBatch" />
+          <EntitySet Name="StudentDocuments" EntityType="OSAAModel.StudentDocument" />
+          <EntitySet Name="StudentFeedbacks" EntityType="OSAAModel.StudentFeedback" />
+          <EntitySet Name="Students" EntityType="OSAAModel.Student" />
+          <EntitySet Name="SystemAdministratorInformations" EntityType="OSAAModel.SystemAdministratorInformation" />
+          <EntitySet Name="SystemAdmins" EntityType="OSAAModel.SystemAdmin" />
+          <AssociationSet Name="FK_AcademicInformations_AcademicInstutions" Association="OSAAModel.FK_AcademicInformations_AcademicInstutions">
+            <End Role="AcademicInstution" EntitySet="AcademicInstutions" />
+            <End Role="AcademicInformation" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInformations_EducationLevels" Association="OSAAModel.FK_AcademicInformations_EducationLevels">
+            <End Role="EducationLevel" EntitySet="EducationLevels" />
+            <End Role="AcademicInformation" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInformations_FieldOfStudies" Association="OSAAModel.FK_AcademicInformations_FieldOfStudies">
+            <End Role="FieldOfStudy" EntitySet="FieldOfStudies" />
+            <End Role="AcademicInformation" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInformations_Instructors" Association="OSAAModel.FK_AcademicInformations_Instructors">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="AcademicInformation" EntitySet="AcademicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicInstutions_Countries1" Association="OSAAModel.FK_AcademicInstutions_Countries1">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="AcademicInstution" EntitySet="AcademicInstutions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveInstructors_ActiveInstructors" Association="OSAAModel.FK_ActiveInstructors_ActiveInstructors">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="ActiveInstructor" EntitySet="ActiveInstructors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_AdmissionTypes" Association="OSAAModel.FK_Batches_AdmissionTypes">
+            <End Role="AdmissionType" EntitySet="AdmissionTypes" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdvisorDocuments_FinalProjectAdvisors1" Association="OSAAModel.FK_AdvisorDocuments_FinalProjectAdvisors1">
+            <End Role="FinalProjectAdvisor" EntitySet="FinalProjectAdvisors" />
+            <End Role="AdvisorDocument" EntitySet="AdvisorDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectAdvisors_AdvisorTypes1" Association="OSAAModel.FK_FinalProjectAdvisors_AdvisorTypes1">
+            <End Role="AdvisorType" EntitySet="AdvisorTypes" />
+            <End Role="FinalProjectAdvisor" EntitySet="FinalProjectAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_Departments" Association="OSAAModel.FK_Batches_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_Programs" Association="OSAAModel.FK_Batches_Programs">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentBatches_Batches" Association="OSAAModel.FK_StudentBatches_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="StudentBatch" EntitySet="StudentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Instructors_Departments" Association="OSAAModel.FK_Instructors_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Instructor" EntitySet="Instructors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectAdvisors_FinalProjects" Association="OSAAModel.FK_FinalProjectAdvisors_FinalProjects">
+            <End Role="FinalProject" EntitySet="FinalProjects" />
+            <End Role="FinalProjectAdvisor" EntitySet="FinalProjectAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectAdvisors_Instructors" Association="OSAAModel.FK_FinalProjectAdvisors_Instructors">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="FinalProjectAdvisor" EntitySet="FinalProjectAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjects_Students" Association="OSAAModel.FK_FinalProjects_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="FinalProject" EntitySet="FinalProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectStudents_FinalProjects" Association="OSAAModel.FK_FinalProjectStudents_FinalProjects">
+            <End Role="FinalProject" EntitySet="FinalProjects" />
+            <End Role="FinalProjectStudent" EntitySet="FinalProjectStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SelectedAdvisors_SelectedAdvisors" Association="OSAAModel.FK_SelectedAdvisors_SelectedAdvisors">
+            <End Role="FinalProject" EntitySet="FinalProjects" />
+            <End Role="SelectedAdvisor" EntitySet="SelectedAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinalProjectStudents_Students" Association="OSAAModel.FK_FinalProjectStudents_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="FinalProjectStudent" EntitySet="FinalProjectStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDocuments_FinalProjectStudents" Association="OSAAModel.FK_StudentDocuments_FinalProjectStudents">
+            <End Role="FinalProjectStudent" EntitySet="FinalProjectStudents" />
+            <End Role="StudentDocument" EntitySet="StudentDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstractorRole_Instructors" Association="OSAAModel.FK_InstractorRole_Instructors">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="InstractorRole" EntitySet="InstractorRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstractorRole_Roles" Association="OSAAModel.FK_InstractorRole_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="InstractorRole" EntitySet="InstractorRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorFeedback_Instructors" Association="OSAAModel.FK_InstructorFeedback_Instructors">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="InstructorFeedback" EntitySet="InstructorFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SelectedAdvisors_Instructors" Association="OSAAModel.FK_SelectedAdvisors_Instructors">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="SelectedAdvisor" EntitySet="SelectedAdvisors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemAdmins_Roles" Association="OSAAModel.FK_SystemAdmins_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="SystemAdmin" EntitySet="SystemAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentBatches_Students" Association="OSAAModel.FK_StudentBatches_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentBatch" EntitySet="StudentBatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentFeedback_Students" Association="OSAAModel.FK_StudentFeedback_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentFeedback" EntitySet="StudentFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemAdmins_SystemAdministratorInformation" Association="OSAAModel.FK_SystemAdmins_SystemAdministratorInformation">
+            <End Role="SystemAdministratorInformation" EntitySet="SystemAdministratorInformations" />
+            <End Role="SystemAdmin" EntitySet="SystemAdmins" />
+          </AssociationSet>
+          <EntitySet Name="InstructorImages" EntityType="OSAAModel.InstructorImage" />
+          <EntitySet Name="StudentImages" EntityType="OSAAModel.StudentImage" />
+          <EntitySet Name="SystemAdminImages" EntityType="OSAAModel.SystemAdminImage" />
+          <AssociationSet Name="FK_InstructorImages_Instructors" Association="OSAAModel.FK_InstructorImages_Instructors">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="InstructorImage" EntitySet="InstructorImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentImages_Students" Association="OSAAModel.FK_StudentImages_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentImage" EntitySet="StudentImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemAdminImages_SystemAdministratorInformation" Association="OSAAModel.FK_SystemAdminImages_SystemAdministratorInformation">
+            <End Role="SystemAdministratorInformation" EntitySet="SystemAdministratorInformations" />
+            <End Role="SystemAdminImage" EntitySet="SystemAdminImages" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AcademicInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
+          <Property Name="EducationLevelId" Type="Int32" Nullable="false" />
+          <Property Name="GaduationYear" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InstructorId" Type="Int32" Nullable="false" />
+          <Property Name="FieldOfStudiesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AcademicInstution" Relationship="OSAAModel.FK_AcademicInformations_AcademicInstutions" FromRole="AcademicInformation" ToRole="AcademicInstution" />
+          <NavigationProperty Name="EducationLevel" Relationship="OSAAModel.FK_AcademicInformations_EducationLevels" FromRole="AcademicInformation" ToRole="EducationLevel" />
+          <NavigationProperty Name="FieldOfStudy" Relationship="OSAAModel.FK_AcademicInformations_FieldOfStudies" FromRole="AcademicInformation" ToRole="FieldOfStudy" />
+          <NavigationProperty Name="Instructor" Relationship="OSAAModel.FK_AcademicInformations_Instructors" FromRole="AcademicInformation" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="AcademicInstution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstitutionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AcademicInformations" Relationship="OSAAModel.FK_AcademicInformations_AcademicInstutions" FromRole="AcademicInstution" ToRole="AcademicInformation" />
+          <NavigationProperty Name="Country" Relationship="OSAAModel.FK_AcademicInstutions_Countries1" FromRole="AcademicInstution" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="ActiveInstructor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstructorId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Instructor" Relationship="OSAAModel.FK_ActiveInstructors_ActiveInstructors" FromRole="ActiveInstructor" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="AdmissionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdmissionTypeName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Batches" Relationship="OSAAModel.FK_Batches_AdmissionTypes" FromRole="AdmissionType" ToRole="Batch" />
+        </EntityType>
+        <EntityType Name="AdvisorDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectAdvisorId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Attachement" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FinalProjectAdvisor" Relationship="OSAAModel.FK_AdvisorDocuments_FinalProjectAdvisors1" FromRole="AdvisorDocument" ToRole="FinalProjectAdvisor" />
+        </EntityType>
+        <EntityType Name="AdvisorType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FinalProjectAdvisors" Relationship="OSAAModel.FK_FinalProjectAdvisors_AdvisorTypes1" FromRole="AdvisorType" ToRole="FinalProjectAdvisor" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="ProgramId" Type="Int32" Nullable="false" />
+          <Property Name="AdmissionId" Type="Int32" Nullable="false" />
+          <Property Name="EntryYear" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="AdmissionType" Relationship="OSAAModel.FK_Batches_AdmissionTypes" FromRole="Batch" ToRole="AdmissionType" />
+          <NavigationProperty Name="Department" Relationship="OSAAModel.FK_Batches_Departments" FromRole="Batch" ToRole="Department" />
+          <NavigationProperty Name="Program" Relationship="OSAAModel.FK_Batches_Programs" FromRole="Batch" ToRole="Program" />
+          <NavigationProperty Name="StudentBatches" Relationship="OSAAModel.FK_StudentBatches_Batches" FromRole="Batch" ToRole="StudentBatch" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AcademicInstutions" Relationship="OSAAModel.FK_AcademicInstutions_Countries1" FromRole="Country" ToRole="AcademicInstution" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batches" Relationship="OSAAModel.FK_Batches_Departments" FromRole="Department" ToRole="Batch" />
+          <NavigationProperty Name="Instructors" Relationship="OSAAModel.FK_Instructors_Departments" FromRole="Department" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="EducationLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AcademicInformations" Relationship="OSAAModel.FK_AcademicInformations_EducationLevels" FromRole="EducationLevel" ToRole="AcademicInformation" />
+        </EntityType>
+        <EntityType Name="FieldOfStudy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AcademicInformations" Relationship="OSAAModel.FK_AcademicInformations_FieldOfStudies" FromRole="FieldOfStudy" ToRole="AcademicInformation" />
+        </EntityType>
+        <EntityType Name="FinalProjectAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FinalProjectId" Type="Int32" Nullable="false" />
+          <Property Name="InstractorId" Type="Int32" Nullable="false" />
+          <Property Name="AdvisorTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IsTerminated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AdvisorDocuments" Relationship="OSAAModel.FK_AdvisorDocuments_FinalProjectAdvisors1" FromRole="FinalProjectAdvisor" ToRole="AdvisorDocument" />
+          <NavigationProperty Name="AdvisorType" Relationship="OSAAModel.FK_FinalProjectAdvisors_AdvisorTypes1" FromRole="FinalProjectAdvisor" ToRole="AdvisorType" />
+          <NavigationProperty Name="FinalProject" Relationship="OSAAModel.FK_FinalProjectAdvisors_FinalProjects" FromRole="FinalProjectAdvisor" ToRole="FinalProject" />
+          <NavigationProperty Name="Instructor" Relationship="OSAAModel.FK_FinalProjectAdvisors_Instructors" FromRole="FinalProjectAdvisor" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="FinalProject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="NoOfStudents" Type="Int32" />
+          <Property Name="IsTerminated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FinalProjectAdvisors" Relationship="OSAAModel.FK_FinalProjectAdvisors_FinalProjects" FromRole="FinalProject" ToRole="FinalProjectAdvisor" />
+          <NavigationProperty Name="Student" Relationship="OSAAModel.FK_FinalProjects_Students" FromRole="FinalProject" ToRole="Student" />
+          <NavigationProperty Name="FinalProjectStudents" Relationship="OSAAModel.FK_FinalProjectStudents_FinalProjects" FromRole="FinalProject" ToRole="FinalProjectStudent" />
+          <NavigationProperty Name="SelectedAdvisors" Relationship="OSAAModel.FK_SelectedAdvisors_SelectedAdvisors" FromRole="FinalProject" ToRole="SelectedAdvisor" />
+        </EntityType>
+        <EntityType Name="FinalProjectStudent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FinalProjectId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="IsTerminated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FinalProject" Relationship="OSAAModel.FK_FinalProjectStudents_FinalProjects" FromRole="FinalProjectStudent" ToRole="FinalProject" />
+          <NavigationProperty Name="Student" Relationship="OSAAModel.FK_FinalProjectStudents_Students" FromRole="FinalProjectStudent" ToRole="Student" />
+          <NavigationProperty Name="StudentDocuments" Relationship="OSAAModel.FK_StudentDocuments_FinalProjectStudents" FromRole="FinalProjectStudent" ToRole="StudentDocument" />
+        </EntityType>
+        <EntityType Name="InstractorRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="InstractorId" Type="Int32" Nullable="false" />
+          <Property Name="IsOnPosition" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Instructor" Relationship="OSAAModel.FK_InstractorRole_Instructors" FromRole="InstractorRole" ToRole="Instructor" />
+          <NavigationProperty Name="Role" Relationship="OSAAModel.FK_InstractorRole_Roles" FromRole="InstractorRole" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="InstructorFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstructorId" Type="Int32" Nullable="false" />
+          <Property Name="FeedbackContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FeedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Instructor" Relationship="OSAAModel.FK_InstructorFeedback_Instructors" FromRole="InstructorFeedback" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AcademicInformations" Relationship="OSAAModel.FK_AcademicInformations_Instructors" FromRole="Instructor" ToRole="AcademicInformation" />
+          <NavigationProperty Name="ActiveInstructors" Relationship="OSAAModel.FK_ActiveInstructors_ActiveInstructors" FromRole="Instructor" ToRole="ActiveInstructor" />
+          <NavigationProperty Name="Department" Relationship="OSAAModel.FK_Instructors_Departments" FromRole="Instructor" ToRole="Department" />
+          <NavigationProperty Name="FinalProjectAdvisors" Relationship="OSAAModel.FK_FinalProjectAdvisors_Instructors" FromRole="Instructor" ToRole="FinalProjectAdvisor" />
+          <NavigationProperty Name="InstractorRoles" Relationship="OSAAModel.FK_InstractorRole_Instructors" FromRole="Instructor" ToRole="InstractorRole" />
+          <NavigationProperty Name="InstructorFeedbacks" Relationship="OSAAModel.FK_InstructorFeedback_Instructors" FromRole="Instructor" ToRole="InstructorFeedback" />
+          <NavigationProperty Name="SelectedAdvisors" Relationship="OSAAModel.FK_SelectedAdvisors_Instructors" FromRole="Instructor" ToRole="SelectedAdvisor" />
+          <NavigationProperty Name="InstructorImages" Relationship="OSAAModel.FK_InstructorImages_Instructors" FromRole="Instructor" ToRole="InstructorImage" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Batches" Relationship="OSAAModel.FK_Batches_Programs" FromRole="Program" ToRole="Batch" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InstractorRoles" Relationship="OSAAModel.FK_InstractorRole_Roles" FromRole="Role" ToRole="InstractorRole" />
+          <NavigationProperty Name="SystemAdmins" Relationship="OSAAModel.FK_SystemAdmins_Roles" FromRole="Role" ToRole="SystemAdmin" />
+        </EntityType>
+        <EntityType Name="SelectedAdvisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="InstructorId" Type="Int32" Nullable="false" />
+          <Property Name="IsSelected" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FinalProject" Relationship="OSAAModel.FK_SelectedAdvisors_SelectedAdvisors" FromRole="SelectedAdvisor" ToRole="FinalProject" />
+          <NavigationProperty Name="Instructor" Relationship="OSAAModel.FK_SelectedAdvisors_Instructors" FromRole="SelectedAdvisor" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="StudentBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="BatchId" Type="Int32" Nullable="false" />
+          <Property Name="Section" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Batch" Relationship="OSAAModel.FK_StudentBatches_Batches" FromRole="StudentBatch" ToRole="Batch" />
+          <NavigationProperty Name="Student" Relationship="OSAAModel.FK_StudentBatches_Students" FromRole="StudentBatch" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="StudentDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectStudentId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Attachement" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FinalProjectStudent" Relationship="OSAAModel.FK_StudentDocuments_FinalProjectStudents" FromRole="StudentDocument" ToRole="FinalProjectStudent" />
+        </EntityType>
+        <EntityType Name="StudentFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="FeedbackContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FeedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Student" Relationship="OSAAModel.FK_StudentFeedback_Students" FromRole="StudentFeedback" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FinalProjects" Relationship="OSAAModel.FK_FinalProjects_Students" FromRole="Student" ToRole="FinalProject" />
+          <NavigationProperty Name="FinalProjectStudents" Relationship="OSAAModel.FK_FinalProjectStudents_Students" FromRole="Student" ToRole="FinalProjectStudent" />
+          <NavigationProperty Name="StudentBatches" Relationship="OSAAModel.FK_StudentBatches_Students" FromRole="Student" ToRole="StudentBatch" />
+          <NavigationProperty Name="StudentFeedbacks" Relationship="OSAAModel.FK_StudentFeedback_Students" FromRole="Student" ToRole="StudentFeedback" />
+          <NavigationProperty Name="StudentImages" Relationship="OSAAModel.FK_StudentImages_Students" FromRole="Student" ToRole="StudentImage" />
+        </EntityType>
+        <EntityType Name="SystemAdministratorInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SystemAdmins" Relationship="OSAAModel.FK_SystemAdmins_SystemAdministratorInformation" FromRole="SystemAdministratorInformation" ToRole="SystemAdmin" />
+          <NavigationProperty Name="SystemAdminImages" Relationship="OSAAModel.FK_SystemAdminImages_SystemAdministratorInformation" FromRole="SystemAdministratorInformation" ToRole="SystemAdminImage" />
+        </EntityType>
+        <EntityType Name="SystemAdmin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
+          <Property Name="IsOnPosition" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="OSAAModel.FK_SystemAdmins_Roles" FromRole="SystemAdmin" ToRole="Role" />
+          <NavigationProperty Name="SystemAdministratorInformation" Relationship="OSAAModel.FK_SystemAdmins_SystemAdministratorInformation" FromRole="SystemAdmin" ToRole="SystemAdministratorInformation" />
+        </EntityType>
+        <Association Name="FK_AcademicInformations_AcademicInstutions">
+          <End Type="OSAAModel.AcademicInstution" Role="AcademicInstution" Multiplicity="1" />
+          <End Type="OSAAModel.AcademicInformation" Role="AcademicInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicInstution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformation">
+              <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInformations_EducationLevels">
+          <End Type="OSAAModel.EducationLevel" Role="EducationLevel" Multiplicity="1" />
+          <End Type="OSAAModel.AcademicInformation" Role="AcademicInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EducationLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformation">
+              <PropertyRef Name="EducationLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInformations_FieldOfStudies">
+          <End Type="OSAAModel.FieldOfStudy" Role="FieldOfStudy" Multiplicity="1" />
+          <End Type="OSAAModel.AcademicInformation" Role="AcademicInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FieldOfStudy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformation">
+              <PropertyRef Name="FieldOfStudiesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInformations_Instructors">
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="OSAAModel.AcademicInformation" Role="AcademicInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInformation">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicInstutions_Countries1">
+          <End Type="OSAAModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="OSAAModel.AcademicInstution" Role="AcademicInstution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicInstution">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveInstructors_ActiveInstructors">
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="OSAAModel.ActiveInstructor" Role="ActiveInstructor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActiveInstructor">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_AdmissionTypes">
+          <End Type="OSAAModel.AdmissionType" Role="AdmissionType" Multiplicity="1" />
+          <End Type="OSAAModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdmissionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="AdmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdvisorDocuments_FinalProjectAdvisors1">
+          <End Type="OSAAModel.FinalProjectAdvisor" Role="FinalProjectAdvisor" Multiplicity="1" />
+          <End Type="OSAAModel.AdvisorDocument" Role="AdvisorDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProjectAdvisor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdvisorDocument">
+              <PropertyRef Name="ProjectAdvisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectAdvisors_AdvisorTypes1">
+          <End Type="OSAAModel.AdvisorType" Role="AdvisorType" Multiplicity="1" />
+          <End Type="OSAAModel.FinalProjectAdvisor" Role="FinalProjectAdvisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdvisorType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectAdvisor">
+              <PropertyRef Name="AdvisorTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_Departments">
+          <End Type="OSAAModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="OSAAModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_Programs">
+          <End Type="OSAAModel.Program" Role="Program" Multiplicity="1" />
+          <End Type="OSAAModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="ProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentBatches_Batches">
+          <End Type="OSAAModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="OSAAModel.StudentBatch" Role="StudentBatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentBatch">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Instructors_Departments">
+          <End Type="OSAAModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Instructor">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectAdvisors_FinalProjects">
+          <End Type="OSAAModel.FinalProject" Role="FinalProject" Multiplicity="1" />
+          <End Type="OSAAModel.FinalProjectAdvisor" Role="FinalProjectAdvisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectAdvisor">
+              <PropertyRef Name="FinalProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectAdvisors_Instructors">
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="OSAAModel.FinalProjectAdvisor" Role="FinalProjectAdvisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectAdvisor">
+              <PropertyRef Name="InstractorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjects_Students">
+          <End Type="OSAAModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="OSAAModel.FinalProject" Role="FinalProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProject">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectStudents_FinalProjects">
+          <End Type="OSAAModel.FinalProject" Role="FinalProject" Multiplicity="1" />
+          <End Type="OSAAModel.FinalProjectStudent" Role="FinalProjectStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectStudent">
+              <PropertyRef Name="FinalProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SelectedAdvisors_SelectedAdvisors">
+          <End Type="OSAAModel.FinalProject" Role="FinalProject" Multiplicity="1" />
+          <End Type="OSAAModel.SelectedAdvisor" Role="SelectedAdvisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectedAdvisor">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinalProjectStudents_Students">
+          <End Type="OSAAModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="OSAAModel.FinalProjectStudent" Role="FinalProjectStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FinalProjectStudent">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDocuments_FinalProjectStudents">
+          <End Type="OSAAModel.FinalProjectStudent" Role="FinalProjectStudent" Multiplicity="1" />
+          <End Type="OSAAModel.StudentDocument" Role="StudentDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinalProjectStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentDocument">
+              <PropertyRef Name="ProjectStudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstractorRole_Instructors">
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="OSAAModel.InstractorRole" Role="InstractorRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstractorRole">
+              <PropertyRef Name="InstractorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstractorRole_Roles">
+          <End Type="OSAAModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="OSAAModel.InstractorRole" Role="InstractorRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstractorRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorFeedback_Instructors">
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="OSAAModel.InstructorFeedback" Role="InstructorFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstructorFeedback">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SelectedAdvisors_Instructors">
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="OSAAModel.SelectedAdvisor" Role="SelectedAdvisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SelectedAdvisor">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemAdmins_Roles">
+          <End Type="OSAAModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="OSAAModel.SystemAdmin" Role="SystemAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemAdmin">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentBatches_Students">
+          <End Type="OSAAModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="OSAAModel.StudentBatch" Role="StudentBatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentBatch">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentFeedback_Students">
+          <End Type="OSAAModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="OSAAModel.StudentFeedback" Role="StudentFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentFeedback">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemAdmins_SystemAdministratorInformation">
+          <End Type="OSAAModel.SystemAdministratorInformation" Role="SystemAdministratorInformation" Multiplicity="1" />
+          <End Type="OSAAModel.SystemAdmin" Role="SystemAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemAdministratorInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemAdmin">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InstructorImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BackgroundImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePictureURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveProfilePicture" Type="Boolean" />
+          <Property Name="ActiveBackgroundImage" Type="Boolean" />
+          <Property Name="InstructorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Instructor" Relationship="OSAAModel.FK_InstructorImages_Instructors" FromRole="InstructorImage" ToRole="Instructor" />
+        </EntityType>
+        <EntityType Name="StudentImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BackgroundImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePictureURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="UplaodDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActiveProfilePicture" Type="Boolean" />
+          <Property Name="ActiveBackgroundImage" Type="Boolean" />
+          <NavigationProperty Name="Student" Relationship="OSAAModel.FK_StudentImages_Students" FromRole="StudentImage" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="SystemAdminImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BackgroundImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProfilePictureURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveProfilePicture" Type="Boolean" />
+          <Property Name="ActiveBackgroundImage" Type="Boolean" />
+          <Property Name="SystemAdminId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SystemAdministratorInformation" Relationship="OSAAModel.FK_SystemAdminImages_SystemAdministratorInformation" FromRole="SystemAdminImage" ToRole="SystemAdministratorInformation" />
+        </EntityType>
+        <Association Name="FK_InstructorImages_Instructors">
+          <End Type="OSAAModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="OSAAModel.InstructorImage" Role="InstructorImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstructorImage">
+              <PropertyRef Name="InstructorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentImages_Students">
+          <End Type="OSAAModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="OSAAModel.StudentImage" Role="StudentImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentImage">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemAdminImages_SystemAdministratorInformation">
+          <End Type="OSAAModel.SystemAdministratorInformation" Role="SystemAdministratorInformation" Multiplicity="1" />
+          <End Type="OSAAModel.SystemAdminImage" Role="SystemAdminImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemAdministratorInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemAdminImage">
+              <PropertyRef Name="SystemAdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OSAAModelStoreContainer" CdmEntityContainer="OSAAEntities">
+          <EntitySetMapping Name="AcademicInformations">
+            <EntityTypeMapping TypeName="OSAAModel.AcademicInformation">
+              <MappingFragment StoreEntitySet="AcademicInformations">
+                <ScalarProperty Name="FieldOfStudiesId" ColumnName="FieldOfStudiesId" />
+                <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+                <ScalarProperty Name="GaduationYear" ColumnName="GaduationYear" />
+                <ScalarProperty Name="EducationLevelId" ColumnName="EducationLevelId" />
+                <ScalarProperty Name="AcademicInstitutionId" ColumnName="AcademicInstitutionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcademicInstutions">
+            <EntityTypeMapping TypeName="OSAAModel.AcademicInstution">
+              <MappingFragment StoreEntitySet="AcademicInstutions">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveInstructors">
+            <EntityTypeMapping TypeName="OSAAModel.ActiveInstructor">
+              <MappingFragment StoreEntitySet="ActiveInstructors">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdmissionTypes">
+            <EntityTypeMapping TypeName="OSAAModel.AdmissionType">
+              <MappingFragment StoreEntitySet="AdmissionTypes">
+                <ScalarProperty Name="AdmissionTypeName" ColumnName="AdmissionTypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdvisorDocuments">
+            <EntityTypeMapping TypeName="OSAAModel.AdvisorDocument">
+              <MappingFragment StoreEntitySet="AdvisorDocuments">
+                <ScalarProperty Name="Attachement" ColumnName="Attachement" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="DocumentTitle" ColumnName="DocumentTitle" />
+                <ScalarProperty Name="ProjectAdvisorId" ColumnName="ProjectAdvisorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdvisorTypes">
+            <EntityTypeMapping TypeName="OSAAModel.AdvisorType">
+              <MappingFragment StoreEntitySet="AdvisorTypes">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="OSAAModel.Batch">
+              <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="EntryYear" ColumnName="EntryYear" />
+                <ScalarProperty Name="AdmissionId" ColumnName="AdmissionId" />
+                <ScalarProperty Name="ProgramId" ColumnName="ProgramId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="OSAAModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="OSAAModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationLevels">
+            <EntityTypeMapping TypeName="OSAAModel.EducationLevel">
+              <MappingFragment StoreEntitySet="EducationLevels">
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldOfStudies">
+            <EntityTypeMapping TypeName="OSAAModel.FieldOfStudy">
+              <MappingFragment StoreEntitySet="FieldOfStudies">
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinalProjectAdvisors">
+            <EntityTypeMapping TypeName="OSAAModel.FinalProjectAdvisor">
+              <MappingFragment StoreEntitySet="FinalProjectAdvisors">
+                <ScalarProperty Name="IsTerminated" ColumnName="IsTerminated" />
+                <ScalarProperty Name="AdvisorTypeId" ColumnName="AdvisorTypeId" />
+                <ScalarProperty Name="InstractorId" ColumnName="InstractorId" />
+                <ScalarProperty Name="FinalProjectId" ColumnName="FinalProjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinalProjects">
+            <EntityTypeMapping TypeName="OSAAModel.FinalProject">
+              <MappingFragment StoreEntitySet="FinalProjects">
+                <ScalarProperty Name="IsTerminated" ColumnName="IsTerminated" />
+                <ScalarProperty Name="NoOfStudents" ColumnName="NoOfStudents" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProjectTitle" ColumnName="ProjectTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinalProjectStudents">
+            <EntityTypeMapping TypeName="OSAAModel.FinalProjectStudent">
+              <MappingFragment StoreEntitySet="FinalProjectStudents">
+                <ScalarProperty Name="IsTerminated" ColumnName="IsTerminated" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FinalProjectId" ColumnName="FinalProjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstractorRoles">
+            <EntityTypeMapping TypeName="OSAAModel.InstractorRole">
+              <MappingFragment StoreEntitySet="InstractorRole">
+                <ScalarProperty Name="IsOnPosition" ColumnName="IsOnPosition" />
+                <ScalarProperty Name="InstractorId" ColumnName="InstractorId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstructorFeedbacks">
+            <EntityTypeMapping TypeName="OSAAModel.InstructorFeedback">
+              <MappingFragment StoreEntitySet="InstructorFeedback">
+                <ScalarProperty Name="FeedDate" ColumnName="FeedDate" />
+                <ScalarProperty Name="FeedbackContent" ColumnName="FeedbackContent" />
+                <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instructors">
+            <EntityTypeMapping TypeName="OSAAModel.Instructor">
+              <MappingFragment StoreEntitySet="Instructors">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="OSAAModel.Program">
+              <MappingFragment StoreEntitySet="Programs">
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="OSAAModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SelectedAdvisors">
+            <EntityTypeMapping TypeName="OSAAModel.SelectedAdvisor">
+              <MappingFragment StoreEntitySet="SelectedAdvisors">
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentBatches">
+            <EntityTypeMapping TypeName="OSAAModel.StudentBatch">
+              <MappingFragment StoreEntitySet="StudentBatches">
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDocuments">
+            <EntityTypeMapping TypeName="OSAAModel.StudentDocument">
+              <MappingFragment StoreEntitySet="StudentDocuments">
+                <ScalarProperty Name="Attachement" ColumnName="Attachement" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="DocumentTitle" ColumnName="DocumentTitle" />
+                <ScalarProperty Name="ProjectStudentId" ColumnName="ProjectStudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentFeedbacks">
+            <EntityTypeMapping TypeName="OSAAModel.StudentFeedback">
+              <MappingFragment StoreEntitySet="StudentFeedback">
+                <ScalarProperty Name="FeedDate" ColumnName="FeedDate" />
+                <ScalarProperty Name="FeedbackContent" ColumnName="FeedbackContent" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="OSAAModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemAdministratorInformations">
+            <EntityTypeMapping TypeName="OSAAModel.SystemAdministratorInformation">
+              <MappingFragment StoreEntitySet="SystemAdministratorInformation">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemAdmins">
+            <EntityTypeMapping TypeName="OSAAModel.SystemAdmin">
+              <MappingFragment StoreEntitySet="SystemAdmins">
+                <ScalarProperty Name="IsOnPosition" ColumnName="IsOnPosition" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstructorImages">
+            <EntityTypeMapping TypeName="OSAAModel.InstructorImage">
+              <MappingFragment StoreEntitySet="InstructorImages">
+                <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+                <ScalarProperty Name="ActiveBackgroundImage" ColumnName="ActiveBackgroundImage" />
+                <ScalarProperty Name="ActiveProfilePicture" ColumnName="ActiveProfilePicture" />
+                <ScalarProperty Name="ProfilePictureURL" ColumnName="ProfilePictureURL" />
+                <ScalarProperty Name="BackgroundImage" ColumnName="BackgroundImage" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentImages">
+            <EntityTypeMapping TypeName="OSAAModel.StudentImage">
+              <MappingFragment StoreEntitySet="StudentImages">
+                <ScalarProperty Name="ActiveBackgroundImage" ColumnName="ActiveBackgroundImage" />
+                <ScalarProperty Name="ActiveProfilePicture" ColumnName="ActiveProfilePicture" />
+                <ScalarProperty Name="UplaodDate" ColumnName="UplaodDate" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ProfilePictureURL" ColumnName="ProfilePictureURL" />
+                <ScalarProperty Name="BackgroundImage" ColumnName="BackgroundImage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemAdminImages">
+            <EntityTypeMapping TypeName="OSAAModel.SystemAdminImage">
+              <MappingFragment StoreEntitySet="SystemAdminImages">
+                <ScalarProperty Name="SystemAdminId" ColumnName="SystemAdminId" />
+                <ScalarProperty Name="ActiveBackgroundImage" ColumnName="ActiveBackgroundImage" />
+                <ScalarProperty Name="ActiveProfilePicture" ColumnName="ActiveProfilePicture" />
+                <ScalarProperty Name="ProfilePictureURL" ColumnName="ProfilePictureURL" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="BackgroundImage" ColumnName="BackgroundImage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
