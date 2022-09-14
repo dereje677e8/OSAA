@@ -1,0 +1,64 @@
+﻿@model OnlineStudentAcademicAdvisory.Models.SystemAdministratorInformation
+@{
+    ViewBag.Title = "View";
+}
+
+    <div class="page">
+        <header class="page-cover">
+            <img class="cover-img" src="~/Resources/assets/images/dummy/cover3.jpg" alt="">
+        </header>
+        <div class="page-inner pt-2">
+            <header class="page-title-bar">
+                <div class="row align-items-start">
+                    <div class="col-auto order-lg-first">
+
+                        @if (Session["AdminProfilePictureURL"] != null)
+                        {
+                            <a href="@Url.Action("ChangePicture", "SystemAdminImages", UrlParameter.Optional)" class="user-avatar user-avatar-floated user-avatar-xxl">
+                                <img src="@Url.Content(Session["AdminProfilePictureURL"].ToString())" alt="">
+                            </a>
+                        }
+                        else
+                        {
+                            <img src="~/Resources/Images/th.jpg" alt="" class="Avatar center rounded-circle " width="150" height="150" />
+                        }
+                    </div>
+                   
+                    <div class="w-100 d-lg-none"></div>
+                    <div class="col">
+                        <h3 class="page-title">
+                            @Html.DisplayFor(model => model.FirstName)
+                            @Html.DisplayFor(model => model.MiddleName)
+                        </h3>
+                        <p class="text-muted">
+                            <span class="d-inline-block mr-3"><i class="fas fa-map-marker-alt mr-1"></i> <span>Hawassa,Ethiopia</span></span> <span class="d-inline-block"><i class="fa fa-globe mr-1"></i> <a href="@Url.Action("Home","Index")">OSAA</a></span>
+                        </p>
+                    </div>
+                </div>
+            </header>
+            <div class="page-section">
+                <div class="card card-fluid">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#profile">Details Information</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade" id="home">
+                            </div>
+                            <div class="tab-pane fade active show" id="profile">
+                                <p> <label>Username</label> : @Html.DisplayFor(model => model.Username)</p>
+                                <p> <label>Name</label> : @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.MiddleName)</p>
+                                <p>  <label>Email</label> :@Html.DisplayFor(model => model.Email)</p>
+                                <p> <label>Phone</label>: @Html.DisplayFor(model => model.PhoneNumber)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

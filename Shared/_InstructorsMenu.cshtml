@@ -1,0 +1,55 @@
+﻿<nav id="stacked-menu" class="stacked-menu">
+
+    <ul class="menu mb-6">
+
+        <li class="menu-item mb-3">
+            <a href="@Url.Action("Index","Home")" class="menu-link">
+                <span class="menu-icon fas fa-home"></span> <span class="menu-text text-amazon">Home</span>
+            </a>
+        </li>
+
+
+
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("DepartmentInformation","Students")" class="menu-link">
+                <span class="menu-icon oi oi-browser"></span> <span class="menu-text">Department Information</span>
+            </a>
+
+        </li>
+
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("AdvisorOngoingProjects", "FinalProjectAdvisors")" class="menu-link">
+                <span class="menu-icon oi oi-media-step-forward"></span> <span class="menu-text">Ongoing Projects</span> <span class="badge badge-subtle badge-success"></span>
+            </a>
+
+        </li>
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("AdvisorPreviousProjects", "FinalProjectAdvisors")" class="menu-link">
+                <span class="menu-icon oi oi-media-pause"></span> Previous Project <span class="menu-text"></span>
+            </a>
+
+        </li>
+
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("View", "InstructorProfile")" class="menu-link">
+                <span class="menu-icon oi oi-person"></span> <span class="menu-text">Profile</span>
+            </a>
+
+        </li>
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("InstructorFeedback", "InstructorFeedbacks")" class="menu-link">
+                <span class="menu-icon oi oi-comment-square"></span> <span class="menu-text">Feedback</span>
+            </a>
+
+        </li>
+
+
+
+        <li class="menu-item has-child mb-3">
+            <a class="dropdown-item" href="@Url.Action("Logout","Home")">
+                <span class="dropdown-icon oi oi-account-logout"></span> Logout
+            </a>
+
+        </li>
+    </ul>
+</nav>

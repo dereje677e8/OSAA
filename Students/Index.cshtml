@@ -1,0 +1,104 @@
+﻿@model IEnumerable<OnlineStudentAcademicAdvisory.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+    int number = 0;
+}
+
+<div class="alert   " role="article">
+    <div >
+        <h5>Student List</h5>
+    </div>
+</div>
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            No
+        </th>
+
+        <th>
+            Full Name
+        </th>
+        <th>
+            Id Number
+        </th>
+        <th>
+            Password
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Sex
+        </th>
+        <th>
+            Department
+        </th>
+        <th>
+            Section
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        number++;
+        <tbody>
+            <tr>
+                <td>
+                    @number
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.MiddleName) @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNumber)
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-grey" data-toggle="tooltip" data-placement="right" title="" data-original-title=" @Html.DisplayFor(modelItem => item.Password)">
+                        click
+                    </button>
+                   
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+
+                @foreach (var dep in item.StudentBatches)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => dep.Batch.Department.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => dep.Section)
+                    </td>
+
+                }
+
+                <td>
+                    <a href="@Url.Action("Edit", "Students", new {id=item.Id})">
+                        <i class="far fa-edit"></i>
+                    </a>|
+                    <a href="@Url.Action("Details", "Students", new {id=item.Id})">
+                        <i class="fas fa-list" style="color:green"></i>
+                    </a>|
+                    <a href="@Url.Action("Delete", "Students", new {id=item.Id})">
+                        <i class="fas fa-trash-alt " style="color:red"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+<button class="btn btn-outline-success" >
+    <a href="@Url.Action("AddStudent", "Students")">
+    Add New
+    </a>
+</button>
+

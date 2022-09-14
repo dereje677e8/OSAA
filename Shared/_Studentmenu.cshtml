@@ -1,0 +1,60 @@
+﻿<nav id="stacked-menu" class="stacked-menu">
+  
+    <ul class="menu mb-6">
+
+        <li class="menu-item mb-3">
+            <a href="@Url.Action("Index","Home")" class="menu-link">
+                <span class="menu-icon fas fa-home"></span> <span class="menu-text text-amazon">Home</span>
+            </a>
+        </li>
+
+
+
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("CreateGroup", "Students")" class="menu-link" data-toggle="modal" data-target="#CreateGroup">
+                <span class="menu-icon oi oi-terminal"></span> <span class="menu-text text-black">Create Project</span>
+            </a>
+
+            <!-- Modal -->
+        </li>
+
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("Membership","FinalProjects")" class="menu-link">
+                <span class="menu-icon oi oi-people"></span> <span class="menu-text text-black">Group Membership</span>
+            </a>
+
+        </li>
+
+
+        <li class="menu-item  has-child mb-3">
+            <a href="@Url.Action("ActiveProjects", "FinalProjects")" class="menu-link text-black">
+                <span class="menu-icon oi oi-puzzle-piece"></span> <span class="menu-text">Ongoing Project</span>
+            </a>
+
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("PreviousProjects", "FinalProjects")" class="menu-link text-black">
+                <span class="menu-icon oi oi-pie-chart"></span> Previous Project <span class="menu-text"></span>
+            </a>
+
+        </li>
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("View", "StudentProfile")" class="menu-link">
+                <span class="menu-icon oi oi-person"></span> <span class="menu-text text-black">Profile</span>
+            </a>
+
+        </li>
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("StudentFeedback", "StudentFeedbacks")" class="menu-link text-black">
+                <span class="menu-icon oi oi-chat"></span> <span class="menu-text">Give Feedback</span>
+            </a>
+
+        </li>
+
+        <li class="menu-item has-child mb-3">
+            <a class="menu-link" href="@Url.Action("LogIn","Home")">
+                <span class="dropdown-icon oi oi-account-logout"></span> <span class="menu-text text-black">Logout</span>
+            </a>
+
+        </li>
+    </ul>
+</nav>

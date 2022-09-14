@@ -1,0 +1,57 @@
+﻿<nav id="stacked-menu" class="stacked-menu">
+
+    <ul class="menu mb-6">
+
+        <li class="menu-item mb-3">
+            <a href="@Url.Action("Index","Home")" class="menu-link">
+                <span class="menu-icon fas fa-home"></span> <span class="menu-text text-amazon">Home</span>
+            </a>
+        </li>
+        <li class="menu-item has-child mb-3">
+
+        <li class="menu-item has-child">
+            <a href="@Url.Action("Index", "Instructors") ">
+                <label class="menu-link">
+                    <span class="menu-icon fas fa-chalkboard-teacher"></span> <span class="menu-text">Instructors</span>
+                </label>
+            </a>
+        </li>
+        
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("AddStudent", "Students")" class="menu-link">
+                <span class="menu-icon fas fa-user-graduate"></span> <span class="menu-text">Add Student</span>
+            </a>
+        </li>
+        
+        
+        <li class="menu-item  has-child mb-3">
+            <a href="@Url.Action("Index", "Students")" class="menu-link">
+                <span class="menu-icon oi oi-list"></span> <span class="menu-text">Student List</span> 
+            </a>
+
+        </li>
+       
+        
+        <li class="menu-item has-child mb-3 ">
+            <a href="@Url.Action("View", "AdminProfile")" class="menu-link">
+                <span class="menu-icon oi oi-person">
+                </span> <span class="menu-text">Profile</span>
+            </a>
+
+        </li>
+        
+        <li class="menu-item has-child mb-3">
+            <a href="@Url.Action("SystemFeedbacks", "InstructorFeedbacks")" class="menu-link">
+                <span class="menu-icon oi oi-comment-square"></span> <span class="menu-text">Feedbacks</span>
+            </a>
+
+        </li>
+        
+        <li class="menu-item has-child mb-3">
+            <a class="dropdown-item" href="@Url.Action("LogIn","Home")">
+                <span class="dropdown-icon oi oi-account-logout"></span> Logout
+            </a>
+
+        </li>
+    </ul>
+</nav>

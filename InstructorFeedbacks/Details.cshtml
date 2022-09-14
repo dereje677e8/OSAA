@@ -1,0 +1,42 @@
+﻿@model OnlineStudentAcademicAdvisory.Models.InstructorFeedback
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InstructorFeedback</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FeedbackContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeedbackContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FeedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instructor.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instructor.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

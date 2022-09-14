@@ -1,0 +1,65 @@
+﻿@model IEnumerable<OnlineStudentAcademicAdvisory.Models.FinalProject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List Of Created Projects</h2>
+
+
+<table class="table  table-hover table-bordered">
+    <tr>
+        <th>
+            Project Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Created by
+        </th>
+
+        <th>
+            No of members
+        </th>
+        <th>
+            Status
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.FirstName) @Html.DisplayFor(modelItem => item.Student.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfStudents)
+            </td>
+
+            <td>
+                @if (item.IsActive == true)
+                {
+                    <span class="badge" style="color: black; background-color: seagreen; border-radius: 10px;">Activated</span>
+                }
+                else
+                {
+                    <span class="badge" style="color: black; background-color: red; border-radius: 10px;">Not yet <br /> activated</span>
+                }
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditIsActive", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

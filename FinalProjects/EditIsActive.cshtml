@@ -1,0 +1,69 @@
+﻿@model OnlineStudentAcademicAdvisory.Models.FinalProject
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 style=" color: indigo">Final Project</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("Id",Model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectTitle, "Project Title", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style=" color: indigo; font-size:medium">
+                @Html.DisplayFor(model => model.ProjectTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProjectTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style=" color: indigo; font-size: medium">
+                @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedBy, "Created By", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style=" color: indigo; font-size:medium">
+                @Html.DisplayFor(model => model.Student.FirstName, new { htmlAttributes = new { @class = "form-control" } }) @Html.DisplayFor(model => model.Student.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.Hidden("ProjectTitle", Model.ProjectTitle)
+                    @Html.Hidden("Description", Model.Description)
+                    @Html.Hidden("CreatedBy", Model.CreatedBy)
+                    @Html.Hidden("NoOfStudents", Model.NoOfStudents)
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ActivateGroup")
+</div>

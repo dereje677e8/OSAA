@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+
+    Layout = "~/Views/Shared/LogIn_Layout.cshtml";
+}
+<!-- BEGIN BASE JS -->
+<script src="~/Resources/assets/vendor/jquery/jquery.min.js"></script>
+<script src="~/Resources/assets/vendor/popper.js/umd/popper.min.js"></script>
+<script src="~/Resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+<script src="~/Resources/assets/vendor/particles.js/particles.js"></script>
+<script>
+    $(document).on('theme:init', () => {
+        particlesJS.load('auth-header', '~/Resources/assets/javascript/pages/particles.json');
+    })</script>
+<script src="~/Resources/assets/javascript/theme.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-116692175-1');</script>
+
+
+<main class="auth">
+    <header id="auth-header" class="auth-header"
+            style="background-image: @Url.Content("url(~/Resources/assets/images/illustration/Hu-Office.png)");">
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="64" sizes="144x144"
+                 viewBox="0 0 1080 1080"></svg>
+            <span class="sr-only">Sign In</span>
+        </h1>
+
+        <p>
+            Don't have a account? <a href="#">Create One</a>
+
+
+        </p>
+    </header>
+    <!-- form -->
+
+    <div class="auth-form">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="nav-item" role="banner">
+                <a class="nav-link active" aria-current="page" data-toggle="tab" href="#home" aria-controls="home">
+                    Student
+                </a>
+            </li>
+            <li class="nav-item" role="banner">
+                <a data-toggle="tab" href="#pill2" aria-controls="Staff"
+                   class="nav-link">Staff</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" id="home" class="tab-pane in active">
+                <div class="p-3">
+                    <div class="alert bg-gradient1 text-info"> <h6>Use your Id Number to login</h6></div>
+                    <h6 style="color:red"> @TempData["Error"]</h6>
+                    @using (Html.BeginForm("StudentLogIn", "Home"))
+                    {
+                        <div class="form-horizontal m-t-20" action="index.html">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <input class="form-control" name="IdNumber" type="text" required="" placeholder="Id Number">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <input class="form-control" name="Password" type="password" required="" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">Remember me</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+                            </div>
+
+                            <div class="form-group m-t-10 mb-0 row">
+                                <div class="col-sm-7 m-t-20">
+                                    <a href="@Url.Action("ForgotPassword","Home")" class="text-muted">
+                                        <i class="mdi mdi-lock"></i> <small>Forgot your password ?</small>
+                                    </a>
+                                </div>
+                                <div class="col-sm-5 m-t-20">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+            <div id="pill2" class="tab-pane fade">
+                <div class="p-3">
+                    <div class="alert bg-gradient1 text-info"> <h6>Use your Username to login</h6></div>
+                    <h6 style="color:red"> @TempData["Error"]</h6>
+                    @using (Html.BeginForm("StaffLogIn", "Home"))
+                    {
+                        <div class="form-horizontal m-t-20" action="index.html">
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <input class="form-control" name="Username" type="text" required="" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <input class="form-control" name="Password" type="password" required="" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2">Remember me</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+                            </div>
+                            <div class="form-group m-t-10 mb-0 row">
+                                <div class="col-sm-7 m-t-20">
+                                    <a href="@Url.Action("ForgotPassword","Home")" class="text-muted">
+                                        <i class="mdi mdi-lock"></i> <small>Forgot your password ?</small>
+                                    </a>
+                                </div>
+                                <div class="col-sm-5 m-t-20">
+                                    <a href="@Url.Action("Registration", "Home")" class="text-muted">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+    <footer class="border-bottom p-sm-4">
+        <p>&copy; @DateTime.Now.Year | HU OSAA - All Rights Reserved.</p>
+        <a href="@Url.Action("Developers","Home")" style="position: absolute; bottom: 1pt; right: 12pt;">Developers</a>
+
+    </footer>
+</main>
+

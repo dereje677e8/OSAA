@@ -1,0 +1,142 @@
+﻿@model OnlineStudentAcademicAdvisory.Models.StudentBatch
+
+@using (Html.BeginForm("AddStudent", "Students"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        <div class=" row">
+            <div class=" col-md-6">
+                <h4>Student</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                       <input type="text" name="FirstName" placeholder="First name"/>
+                        @Html.ValidationMessageFor(model => model.Student.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.MiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="MiddleName" placeholder="Middle name" />
+                        @Html.ValidationMessageFor(model => model.Student.MiddleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="LastName" placeholder="Last name" />
+                        @Html.ValidationMessageFor(model => model.Student.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.Sex, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="Sex" placeholder="Sex" />
+                        @Html.ValidationMessageFor(model => model.Student.Sex, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="email" name="Email" placeholder="Email" />
+                        @Html.ValidationMessageFor(model => model.Student.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>  <div class="form-group">
+                    @Html.LabelFor(model => model.Student.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="PhoneNumber" placeholder="Phone Number" />
+                        @Html.ValidationMessageFor(model => model.Student.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="password" name="Password" placeholder="Password" />
+                        @Html.ValidationMessageFor(model => model.Student.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.IdNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="IdNumber" placeholder="Id Number" />
+                        @Html.ValidationMessageFor(model => model.Student.IdNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-md-6">
+                <h4>Batch Information</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Batch.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control chzn-select", @placeholder = "-select department-" })
+                        @Html.ValidationMessageFor(model => model.Batch.DepartmentId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Batch.ProgramId, "ProgramId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ProgramId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Batch.ProgramId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Batch.AdmissionId, "AdmissionId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("AdmissionId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Batch.AdmissionId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Batch.EntryYear, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="date" name="EntryYear" placeholder="Entry Year" />
+                        @Html.ValidationMessageFor(model => model.Batch.EntryYear, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    Section
+                    <div class="col-md-10">
+                        <input type="text", name="Section", placeholder="Section"/>
+                        @Html.ValidationMessageFor(model => model.Section, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+           
+            @*@Html.Hidden("StudentId", Model.Student.Id)
+        @Html.Hidden("BatchId", Model.Batch.Id)*@
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+
+
+
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

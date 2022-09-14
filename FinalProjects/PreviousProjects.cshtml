@@ -1,0 +1,132 @@
+﻿@model IEnumerable<OnlineStudentAcademicAdvisory.Models.FinalProjectStudent>
+
+@{
+    ViewBag.Title = "Index";
+    int num = 0;
+}
+
+<div class="">
+    <div class="alert bg-gradient2 text-black mb-0" role="article">
+        <h5>Previous Projects Created by you</h5>
+    </div>
+</div>
+
+<table class="table" hover>
+    <tr>
+        <th>
+            No
+        </th>
+        <th>
+            Project Title
+        </th>
+        <th>
+            Description
+        </th>
+   
+        <th>
+            No of Members
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        num++;
+        <tr>
+            <td>
+                @num
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalProject.ProjectTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalProject.Description)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalProject.NoOfStudents)
+            </td>
+
+            <td>
+
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#GroupMembers">Project Details</button>
+
+                <!-- Modal -->
+                <div id="GroupMembers" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Members of this group were:</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+                            </div>
+                            <div class="modal-body">
+                                <hr />
+                                <table>
+
+                                    <thead>
+
+                                        <tr>
+                                            <th>
+                                                No
+                                            </th>
+                                            <th>
+                                                Full Name
+                                            </th>
+                                            <th>
+                                                Id Number
+                                            </th>
+
+                                            <th>
+                                                Email
+                                            </th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+
+                                        @foreach (var value in Model)
+                                        {
+                                            int Number = +1;
+
+                                            <tr>
+                                                <td>
+                                                    @Number
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => value.Student.FirstName) @Html.DisplayFor(modelItem => value.Student.MiddleName) @Html.DisplayFor(modelItem => value.Student.LastName)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => value.Student.IdNumber)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => value.Student.Sex)
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+

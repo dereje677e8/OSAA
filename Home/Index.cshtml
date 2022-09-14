@@ -1,0 +1,156 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-xl-8 h-100">
+        <div class="wrapper">
+            <div class="page">
+                <header class="page-cover">
+                    <div class="text-center">
+
+                        @if (Session["StudentId"] != null)
+                        {
+                            if (Session["ProfilePictureURL"] != null)
+                            {
+
+                                <img src="@Url.Content(Session["ProfilePictureURL"].ToString())" alt="" class="rounded-circle align-items-center justify-content-center " width="100" height="100" />
+
+                            }
+                            else
+                            {
+                                <img src="~/assets/images/baseline_school_black_24dp.png" alt="" class="rounded-circle align-items-center justify-content-center " width="100" height="100" />
+                            }
+
+
+                        }
+
+                        @if (Session["InstructorId"] != null)
+                        {
+                            if (Session["InstructorProfilePictureURL"] != null)
+                            {
+                                <img src="@Url.Content(Session["InstructorProfilePictureURL"].ToString())" alt="" class="rounded-circle align-items-center justify-content-center " width="100" height="100" />
+
+                            }
+
+                            else if (Session["HeadProfilePictureURL"] != null)
+                            {
+                                <img src="@Url.Content(Session["HeadProfilePictureURL"].ToString())" alt="" class="rounded-circle align-items-center justify-content-center " width="100" height="100" />
+                            }
+
+                            else
+                            {
+                                <img src="~/assets/images/baseline_school_black_24dp.png" alt="" class="Avatar center rounded-circle " width="150" height="150" />
+
+                            }
+
+
+                        }
+                        @if (Session["SystemAdminId"] != null)
+                        {
+                            if (Session["AdminProfilePictureURL"] != null)
+                            {
+
+                                <img src="@Url.Content(Session["AdminProfilePictureURL"].ToString())" alt="" class="rounded-circle align-items-center justify-content-center " width="100" height="100" />
+
+                            }
+                            else
+                            {
+                                <img src="~/assets/images/baseline_school_black_24dp.png" alt="" class="Avatar center rounded-circle " width="150" height="150" />
+                            }
+
+
+
+                        }
+
+                        <h2 class="h4 mt-2 mb-0">@Session["FirstName"] @Session["MiddleName"]   </h2>
+
+                        <p class="text-box"> @Session["Department"] </p>
+                        <p> Online Student Academic Advisory </p>
+                    </div>
+                </header>
+                <hr />
+                <br />
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="~/Resources/Image/Screenshot (15).png" alt="First slide" style="height: 300px" />
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Resources/Image/Screenshot (16).png" alt="Second slide" style="height: 300px" />
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Resources/Image/Screenshot (17).png" alt="Third slide" style="height: 300px" />
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Resources/Image/Screenshot (18).png" alt="fourth slide" style="height: 300px" />
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Resources/Image/Screenshot (19).png" alt="fifth slide" style="height: 300px" />
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="~/Resources/Image/Screenshot (20).png" alt="fifth slide" style="height: 300px" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    @Html.Partial("_Announcement")
+</div>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create Project</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateGroup", "Students"))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.Label("ProjectTitle", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBox("ProjectTitle", "", new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextArea("Description", new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+

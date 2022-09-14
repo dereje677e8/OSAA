@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Sign In | OSAA </title>
+    <meta property="og:title" content="Sign In">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Online Student Academic Advisory">
+    <meta property="og:description" content="Online Student Academic Advisory">
+    <meta property="og:site_name" content="OSAA">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/Hu-Office.png">
+    <link rel="shortcut icon" href="assets/Hu-logo.png">
+    <meta name="theme-color" content="#3063A0">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End Google font -->
+    <link rel="stylesheet" href="~/Resources/assets/vendor/fortawesome/fontawesome-free/css/all.min.css"><!-- END PLUGINS STYLES -->
+    <link rel="stylesheet" href="~/Resources/assets/stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="~/Resources/assets/stylesheets/theme-dark.min.css" data-skin="data-skin">
+    <link rel="stylesheet" href="~/Resources/assets/stylesheets/custom.css">
+    <script>
+    var skin = localStorage.getItem('skin') || 'default';
+        var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+        disabledSkinStylesheet.setAttribute('rel', '');
+        disabledSkinStylesheet.setAttribute('disabled', true);
+        document.querySelector('html').classList.add('loading');</script>
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

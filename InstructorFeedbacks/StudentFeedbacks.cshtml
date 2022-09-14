@@ -1,0 +1,73 @@
+﻿<div>
+    @model IEnumerable<OnlineStudentAcademicAdvisory.Models.StudentFeedback>
+
+    @{
+        ViewBag.Title = "SystemFeedbacks";
+    }
+
+    <h2>Feedbacks from Students</h2>
+
+
+
+
+    @foreach (var item in Model)
+    {
+        <div class="card card-expansion-item">
+            <div class="card-header border-0" id="headingOne">
+                <button class="btn btn-reset collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <span class="collapse-indicator mr-2">
+                        <i class="fa fa-fw fa-caret-right"></i>
+                    </span>
+                    <span>
+                        @Html.DisplayFor(modelItem => item.Student.FirstName) @Html.DisplayFor(modelItem => item.Student.MiddleName)<br />
+                    </span>
+                </button>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                <div class="card-body pt-0">
+                    @Html.DisplayFor(modelItem => item.FeedbackContent)
+                </div>
+            </div>
+        </div>
+
+    }
+
+    <div class="col-lg-6">
+        <!-- #accordion -->
+        <div id="accordion" class="card-expansion">
+            <!-- .card -->
+            <div class="card card-expansion-item">
+                <div class="card-header border-0" id="headingOne">
+                    <button class="btn btn-reset collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span> <span>Expandable Item #1</span></button>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                    <div class="card-body pt-0">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div><!-- /.card -->
+            <!-- .card -->
+            <div class="card card-expansion-item expanded">
+                <div class="card-header border-0" id="headingTwo">
+                    <button class="btn btn-reset" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span> <span>Expandable Item #2</span></button>
+                </div>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion" style="">
+                    <div class="card-body pt-0">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div><!-- /.card -->
+            <!-- .card -->
+            <div class="card card-expansion-item">
+                <div class="card-header border-0" id="headingThree">
+                    <button class="btn btn-reset collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span> <span>Expandable Item #3</span></button>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion" style="">
+                    <div class="card-body pt-0">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div><!-- /.card -->
+        </div><!-- /#accordion -->
+    </div>
+</div>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<OnlineStudentAcademicAdvisory.Models.FinalProjectStudent>
+
+@{
+    ViewBag.Title = "Index";
+    int num = 0;
+}
+
+<div class="">
+    <div class="alert bg-gradient2 text-black mb-0" role="article">
+        <h5>You are currently member of the projects below</h5>
+    </div>
+</div>
+<table id="example" class="table table-bordered dt-responsive nowrap">
+    <tr>
+        <th>
+            No
+        </th>
+
+        <th>
+            Project Title
+        </th>
+
+        <th>
+            Description
+        </th>
+
+        <th>
+            No of Students
+        </th>
+        <th>
+            Status
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        num++;
+
+        <tr>
+            <td>
+                @num
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalProject.ProjectTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalProject.Description)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalProject.NoOfStudents)
+            </td>
+            <td>
+                @if (item.FinalProject.IsActive == true)
+                {
+
+                    <span class="badge" style="color: black; background-color: seagreen; border-radius: 10px;">Active</span>
+
+                }
+                else if (item.FinalProject.IsActive == false)
+                {
+                    <span class="badge" style="color: black; background-color: red; border-radius: 10px;">Inactive</span>
+
+                }
+            </td>
+
+            <td>
+                @if (item.FinalProject.IsActive == true)
+                {
+                    <a href="@Url.Action("StudentDetails", "FinalProjects", new { id = item.FinalProject.Id })">
+                        <i class="fas fa-list"></i>
+                    </a>
+                }
+                else if (item.FinalProject.IsActive == false)
+                {
+                    <a href="#" class="mr-auto" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Not Activatated">
+                        <i class="fas fa-list"></i>
+                        </a>
+
+                }
+                </td>
+
+        </tr>
+                }
+
+
+</table>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>

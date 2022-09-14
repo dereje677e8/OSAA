@@ -1,0 +1,729 @@
+﻿@model OnlineStudentAcademicAdvisory.Models.FinalProject
+
+@{
+    var studentDocument = (OnlineStudentAcademicAdvisory.Models.StudentDocument)ViewBag.studentDocument;
+    var advisorDocument = (OnlineStudentAcademicAdvisory.Models.AdvisorDocument)ViewBag.advisorDocuments;
+    int num = 0;
+    int number = 0;
+    ViewBag.Title = "StudentDetails";
+    int currentStudent = int.Parse(Session["StudentId"].ToString());
+    var finalAdvisors = Model.FinalProjectAdvisors.Where(f => f.FinalProjectId == Model.Id);
+    if (finalAdvisors.Any())
+    {
+        var finalAdvisor = Model.FinalProjectAdvisors.Where(f => f.FinalProjectId == Model.Id).FirstOrDefault();
+        int finalAdvisorProjectId = finalAdvisor.Id;
+    }
+
+
+    var finalStudent = Model.FinalProjectStudents.Where(f => f.StudentId == currentStudent && f.FinalProjectId == Model.Id).FirstOrDefault();
+    int numberOfmembers = (int)finalStudent.FinalProject.NoOfStudents;
+    int finalStudentProjectId = finalStudent.Id;
+
+
+}
+
+<h2>Details</h2>
+
+<div class="bg-danger bg-gradient3">
+    <p>@TempData["NotSent"]</p>
+</div>
+<div class="row">
+    <div class="col-md-4 freebirdFormviewerViewFormCard exportFormCard">
+        <div class="freebirdFormviewerViewHeaderThemeStripe freebirdSolidBackground exportThemeStripe"></div>
+        <div class="bg-gradient2">
+            <h6>Description Regarding the Project</h6>
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                Project title:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProjectTitle)
+            </dd>
+
+            <dt>
+                Status
+            </dt>
+
+            <dd>
+                @if (Model.IsActive == true)
+                {
+
+                    <span class="badge" style="color: black; background-color: seagreen; border-radius: 10px;">Active</span>
+
+                }
+                else if (Model.IsActive == false)
+                {
+                    <span class="badge" style="color: black; background-color: red; border-radius: 10px;">Inactive</span>
+
+                }
+            </dd>
+
+            <dt>
+                No of members
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NoOfStudents)
+            </dd>
+
+            <dt>
+                Created By
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Student.FirstName) @Html.DisplayFor(model => model.Student.MiddleName)
+            </dd>
+
+            <dd>
+                <div class="accordion navbar-light" id="accordionExample">
+                    <div class="card mb-0">
+                        <div class="card-header " id="headingOne">
+                            <h5 class="my-1 bg-light">
+                                <button class="btn btn-light text-dark collapsed font-16" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="color:indigo">
+                                    <b>See Description</b>
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
+                            <p>
+                                Title :  @Html.DisplayFor(model => model.ProjectTitle)
+                            </p>
+                            <div class="card-body">
+                                @Html.DisplayFor(model => model.Description)
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-4">
+        <div class=" bg-gradient2">
+            <h4>Group Members</h4>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Student Name</th>
+                        @if (numberOfmembers < 5)
+                        {
+                            <th>
+                                <button type="button" class="btn btn-border-secondary " data-toggle="modal" data-target="#AddStudent" style="color: white"><i class="oi oi-plus"></i></button>
+                                <!-- Modal -->
+                                <div id="AddStudent" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" style="color: black">Add Member for your projects</h5>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @using (Html.BeginForm("AddMembers", "Students"))
+                                                {
+                                                    @Html.AntiForgeryToken()
+
+                                                    <div class="form-horizontal">
+
+                                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                        <div class="form-group">
+                                                            <div>
+                                                                @Html.Hidden("ProjectId", Model.Id)
+
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Student Name</label>
+                                                            <div class="col-md-10">
+                                                                @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(model => model.Student.Id, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input type="submit" value="Confirm" class="btn btn-success" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </th>
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FinalProjectStudents)
+                    {
+                        num++;
+
+                        <tr>
+                            <td>
+                                @num
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Student.FirstName)
+                            </td>
+
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class=" bg-gradient2">
+            <h4>Advisor</h4>
+        </div>
+        <div class="container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>advisor Name</th>
+                        <th>Type</th>
+                        <th>
+                            <button type="button" class="btn btn-border-secondary " data-toggle="modal" data-target="#SelectAdvisor" style="color: white"><i class="oi oi-plus"></i></button>
+
+                            <div id="SelectAdvisor" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" style="color: black">Add Advisor for your project</h5>
+                                            <button type="button" class="close btn btn-primary" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @using (Html.BeginForm("SelectAdvisor", "FinalProjects"))
+                                            {
+                                                @Html.AntiForgeryToken()
+
+                                                <div class="form-horizontal">
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-10">
+
+                                                            @Html.Hidden("ProjectId", Model.Id)
+
+                                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <lable>Active advisors</lable>
+                                                        <div class="col-md-10">
+                                                            @Html.DropDownList("InstructorId", null, htmlAttributes: new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-10">
+                                                            <input type="submit" value="Confirm" class="btn btn-success" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FinalProjectAdvisors)
+                    {
+                        number++;
+
+                        <tr>
+                            <td>
+                                @number
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Instructor.FirstName) @Html.DisplayFor(modelItem => item.Instructor.MiddleName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AdvisorType.TypeName)
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<hr />
+
+<main class="app-main">
+    <!-- .wrapper -->
+    <div class="wrapper">
+        <!-- .page -->
+        <div class="page has-sidebar has-sidebar-expand-xl">
+            <!-- .page-inner -->
+            <div class="page-inner page-inner-fill">
+                <!-- .message -->
+                <div class="message">
+                    <!-- message header -->
+                    <div class="message-header">
+                        <div class="d-flex">
+                            <a class="btn btn-light btn-icon" href="#"><i class="fa fa-flip-horizontal fa-share"></i></a>
+                        </div>
+                        <h4 class="message-title"> Time Today @DateTime.Now</h4>
+                        <div class="message-header-actions">
+                            <button type="button" class="btn btn-light btn-icon d-xl-none" data-toggle="sidebar"><i class="fa fa-angle-double-left"></i></button>
+                        </div><!-- /message header -->
+                    </div>
+                    <!-- message body -->
+                    <div class="message-body">
+                        <!-- .card -->
+                        <div class="card card-fluid mb-0">
+                            <!-- .conversations -->
+                            <div role="log" class="conversations">
+                                <!-- .conversation-list -->
+                                <ul class="conversation-list">
+                                    <!-- .conversation-divider -->
+
+                                    <li class="log-divider">
+                                        <span><i class="far fa-fw fa-comment-alt"></i> Chat started by <strong>@Model.Student.FirstName</strong> · Wed, Feb 14, 2018</span>
+                                    </li><!-- /.conversation-divider -->
+                                    <!-- .conversation-inbound -->
+                                    @foreach (var projectStudent in Model.FinalProjectStudents)
+                                    {
+
+                                        foreach (var document in projectStudent.StudentDocuments)
+                                        {
+                                            if ((document.Message != null && document.Message != "") || (document.Attachement != null && document.Attachement != "-1"))
+                                            {
+
+                                                <li class="conversation-inbound">
+                                                    <div class="conversation-avatar">
+                                                        <a href="#" class="tile tile-circle bg-muted"><i class="oi oi-person"></i></a>
+                                                    </div>
+
+                                                </li><!-- /.conversation-inbound -->
+                                                <!-- .conversation-inbound -->
+                                                if (document.Message.ToString() != "-1" && document.Message.ToString() != "")
+                                                {
+
+                                                    <li class="conversation-inbound conversation-faux">
+                                                        <div class="conversation-message conversation-message-skip-avatar">
+                                                            <div class="conversation-message-text">
+
+                                                                <h6>@document.Message</h6>
+                                                                <div class="conversation-meta">
+                                                                    @Html.DisplayFor(modelItem => projectStudent.Student.FirstName) @Html.DisplayFor(modelItem => projectStudent.Student.MiddleName)
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="conversation-actions dropdown">
+                                                            <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-h"></i></button>
+                                                            <div class="dropdown-menu">
+                                                                <div class="dropdown-arrow ml-n1"></div><button type="button" class="dropdown-item">Copy text</button> <button type="button" class="dropdown-item">Edit</button> <button type="button" class="dropdown-item">Reply</button> <button type="button" class="dropdown-item">Remove</button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                                if (document.Attachement != null && document.Attachement != "-1")
+                                                {
+                                                    <li class="conversation-inbound conversation-faux">
+                                                        <div class="conversation-message conversation-message-skip-avatar">
+                                                            <div class="conversation-message-text has-attachment">
+                                                                <div class="pswp-gallery">
+                                                                    <!-- .card-figure -->
+                                                                    <div class="card card-figure">
+                                                                        <!-- .card-figure -->
+                                                                        <figure class="figure">
+                                                                            <!-- .figure-img -->
+                                                                            <div class="figure-img figure-attachment">
+                                                                                <img src="" alt="Card image cap"> <a href="@Url.Content(document.Attachement)" class="img-link" data-size="600x450"><span class="tile tile-circle bg-danger"><span class="oi oi-eye"></span></span> <span class="img-caption d-none">@document.DocumentTitle</span></a>
+                                                                            </div><!-- /.figure-img -->
+
+                                                                            <figcaption class="figure-caption">
+                                                                                <ul class="list-inline d-flex text-muted mb-0">
+                                                                                    <li class="list-inline-item">
+                                                                                        <button href="@Url.Action( "DownloadFile","FinalProjects", new { Name = document.Attachement })" type="button" class="btn btn-reset" title="Download">
+                                                                                            <span class="oi oi-data-transfer-download">
+                                                                                                @Html.ActionLink("Download", "DownloadFile", new { Name = document.Attachement })
+                                                                                            </span>
+                                                                                        </button>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </figcaption>
+                                                                            <div class="conversation-meta">
+                                                                                @Html.DisplayFor(modelItem => projectStudent.Student.FirstName) @Html.DisplayFor(modelItem => projectStudent.Student.MiddleName)
+                                                                            </div>
+                                                                        </figure><!-- /.card-figure -->
+                                                                    </div><!-- /.card-figure -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="conversation-actions dropdown">
+                                                            <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-h"></i></button>
+                                                            <div class="dropdown-menu">
+                                                                <div class="dropdown-arrow ml-n1"></div><button type="button" class="dropdown-item">Copy text</button> <button type="button" class="dropdown-item">Edit</button> <button type="button" class="dropdown-item">Reply</button> <button type="button" class="dropdown-item">Remove</button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                                <!-- /.conversation-inbound -->
+
+
+
+                                                <!-- /.conversation-inbound -->
+                                            }
+                                        }
+
+                                    }
+                                    <!-- .conversation-outbound -->
+                                    @foreach (var advisor in Model.FinalProjectAdvisors)
+                                    {
+
+                                        foreach (var document in advisor.AdvisorDocuments)
+                                        {
+                                            if ((document.Message != null && document.Message != "") || (document.Attachement != null && document.Attachement != "-1"))
+                                            {
+
+                                                if (document.Message.ToString() != "-1" && document.Message.ToString() != "")
+                                                {
+
+                                                    @*<li class="conversation-inbound conversation-faux">
+                                                            <div class="conversation-message conversation-message-skip-avatar">
+                                                                <div class="conversation-message-text">
+
+                                                                    <h6>@document.Message</h6>
+                                                                    <div class="conversation-meta">
+                                                                        @Html.DisplayFor(modelItem => advisor.Instructor.FirstName) @Html.DisplayFor(modelItem => advisor.Instructor.MiddleName)
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="conversation-actions dropdown">
+                                                                <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-h"></i></button>
+                                                                <div class="dropdown-menu">
+                                                                    <div class="dropdown-arrow ml-n1"></div><button type="button" class="dropdown-item">Copy text</button> <button type="button" class="dropdown-item">Edit</button> <button type="button" class="dropdown-item">Reply</button> <button type="button" class="dropdown-item">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </li>*@
+                                                    <li class="conversation-outbound">
+                                                        <div class="conversation-actions dropdown">
+                                                            <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-h"></i></button>
+                                                            <div class="dropdown-menu">
+                                                                <div class="dropdown-arrow ml-n1"></div><button type="button" class="dropdown-item">Copy text</button> <button type="button" class="dropdown-item">Edit</button> <button type="button" class="dropdown-item">Reply</button> <button type="button" class="dropdown-item">Remove</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="conversation-message">
+                                                            <div class="conversation-message-text">
+                                                                @document.Message
+                                                                <div class="conversation-meta">
+                                                                    @Html.DisplayFor(modelItem => advisor.Instructor.FirstName) @Html.DisplayFor(modelItem => advisor.Instructor.MiddleName)
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                }
+
+                                                if (document.Attachement != null && document.Attachement.ToString() != "-1")
+                                                {
+
+
+                                                    @*<li class="conversation-outbound">
+                                                            <div class="conversation-actions dropdown">
+                                                                <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-h"></i></button>
+                                                                <div class="dropdown-menu">
+                                                                    <div class="dropdown-arrow ml-n1"></div><button type="button" class="dropdown-item">Copy text</button> <button type="button" class="dropdown-item">Edit</button> <button type="button" class="dropdown-item">Reply</button> <button type="button" class="dropdown-item">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="conversation-message">
+                                                                <div class="conversation-message-text">@document.Message </div>
+                                                            </div>
+                                                        </li>*@<!-- /.conversation-outbound -->
+                                                    <!-- .conversation-outbound -->
+                                                    <!-- /.conversation-outbound -->
+                                                    <li class="conversation-outbound">
+                                                        <div class="conversation-actions dropdown">
+                                                            <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-h"></i></button>
+
+                                                        </div>
+                                                        <div class="conversation-message">
+                                                            <div class="conversation-message-text has-attachment">
+                                                                <div class="media align-items-center">
+                                                                    <span class="fa-stack fa-lg mr-1"><i class="fa fa-square fa-stack-2x text-white"></i> <i class="fa fa-file-pdf fa-stack-1x text-muted"></i></span> <a href="@Url.Content(document.Attachement)" class="media-body">@document.DocumentTitle</a>
+
+                                                                </div>
+                                                                <button href="@Url.Action( "DownloadFile","FinalProjects", new { Name = document.Attachement })" type="button" class="btn btn-reset" title="Download">
+                                                                    <span class="oi oi-data-transfer-download">
+                                                                        @Html.ActionLink("Download", "DownloadFile", new { Name = document.Attachement })
+                                                                    </span>
+                                                                </button>
+                                                                <div class="conversation-meta">
+                                                                    @Html.DisplayFor(modelItem => advisor.Instructor.FirstName) @Html.DisplayFor(modelItem => advisor.Instructor.MiddleName)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li><!-- /.conversation-outbound -->
+
+                                                }
+
+                                            }
+                                        }
+                                    }
+
+
+                                </ul><!-- /.conversation-list -->
+                            </div><!-- /.conversations -->
+                            <!-- PhotoSwipe (.pswp) element -->
+                        </div><!-- /.card -->
+                    </div><!-- /message body -->
+                    <!-- message publisher -->
+                    @using (Html.BeginForm("StudentAddFile", "FinalProjects", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.Hidden("ProjectId", Model.Id)
+
+                        @Html.Hidden("ProjectId", Model.Id)
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.Hidden("ProjectStudentId", finalStudentProjectId)
+                                @Html.ValidationMessageFor(model => studentDocument.ProjectStudentId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <input type="hidden" value="@DateTime.Now" name="uploadDate" />
+                        @ViewBag.uploadDate
+                        <div class="message-publisher">
+                            <!-- form -->
+
+                            <form>
+                                <!-- .media -->
+                                <div class="media mb-1">
+                                    <div class="btn btn-light btn-icon fileinput-button">
+                                        <i class="fa fa-paperclip"></i> <input type="file" id="pm-attachment" name="File" multiple>
+                                    </div>
+                                    <div class="media-body">
+                                        <input type="text" class="form-control border-0 shadow-none" name="Message" placeholder="Type a message">
+                                    </div>
+                                    <div>
+
+
+                                        <button type="button" class="btn btn-light btn-icon"><i class="far fa-smile"></i></button> <button type="submit" class="btn btn-light btn-icon"><i class="far fa-paper-plane"></i></button>
+                                    </div>
+                                </div><!-- /.media -->
+                            </form><!-- /form -->
+                        </div>
+                    }
+                    <!-- /message publisher -->
+                </div><!-- /.message -->
+            </div>
+
+            <!-- /.page-inner -->
+            <!-- .page-sidebar -->
+            <div class="page-sidebar">
+                <!-- .sidebar-header -->
+                <header class="sidebar-header d-sm-none">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item">
+                            <a class="prevent-default" href="#" onclick="Looper.toggleSidebar()"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+                        </li>
+                    </ol>
+                </header><!-- /.sidebar-header -->
+                <!-- .nav-tabs -->
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#team-profile" role="tab" aria-controls="team-profile" aria-selected="true">Team Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#message-files" role="tab" aria-controls="message-files" aria-selected="false">Files</a>
+                    </li>
+                </ul><!-- /.nav-tabs -->
+                <!-- .sidebar-section-fill -->
+                <div class="sidebar-section-fill">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!-- #team-profile -->
+                        <div id="team-profile" class="tab-pane fade show active" role="tabpanel" aria-labelledby="team-profile">
+                            <!-- .card -->
+                            <div class="card card-reflow border-bottom">
+                                <!-- .card-body -->
+                                <div class="card-body text-center">
+                                    <!-- team avatar -->
+                                    <a href="#" class="user-avatar user-avatar-xl my-3"><img src="~/Resources/assets/images/avatars/team4.jpg" alt=""></a> <!-- /team avatar -->
+                                    <h3 class="card-title text-truncate">
+                                        <a href="#">@Model.ProjectTitle</a>
+                                    </h3>
+                                    <h6 class="card-subtitle text-muted mb-3">Hawassa, Feb 7, 2022 </h6><!-- grid row -->
+                                    <!--<div class="row">-->
+                                    <!-- grid column -->
+                                    <!--<div class="col-4">-->
+                                    <!-- .metric -->
+                                    <!--<div class="metric">
+                                        <h6 class="metric-value"> 42 </h6>
+                                        <p class="metric-label mt-1"> Projects </p>
+                                    </div>-->
+                                    <!-- /.metric -->
+                                    <!--</div>--><!-- /grid column -->
+                                    <!-- grid column -->
+                                    <!--<div class="col-4">-->
+                                    <!-- .metric -->
+                                    <!--<div class="metric">
+                                        <h6 class="metric-value"> 34 </h6>
+                                        <p class="metric-label mt-1"> Completed </p>
+                                    </div>-->
+                                    <!-- /.metric -->
+                                    <!--</div>--><!-- /grid column -->
+                                    <!-- grid column -->
+                                    <!--<div class="col-4">-->
+                                    <!-- .metric -->
+                                    <!--<div class="metric">
+                                        <h6 class="metric-value"> 8 </h6>
+                                        <p class="metric-label mt-1"> On Going </p>
+                                    </div>-->
+                                    <!-- /.metric -->
+                                    <!--</div>--><!-- /grid column -->
+                                    <!--</div>--><!-- /grid row -->
+                                </div>
+                            </div>
+                            <div class="list-group list-group-reflow list-group-flush list-group-divider">
+                                <div class="list-group-header">
+                                    @Html.DisplayFor(model => model.NoOfStudents)
+                                    Members
+                                </div>
+
+                                <div class="list-group-item">
+                                    @foreach (var item in Model.FinalProjectStudents)
+                                    {
+
+                                        <div class="list-group-item-figure align-items-start">
+                                            <a href="#" class="user-avatar"><img src="~/Resources/assets/images/dummy/img-2.jpg" alt=""> <span class="avatar-badge offline" title="offline"></span></a>
+                                        </div>
+                                        <div class="list-group-item-body">
+                                            <h4 class="list-group-item-title">
+                                                <a href="#">@Html.DisplayFor(modelItem => item.Student.FirstName)</a>
+                                            </h4>
+                                            <p class="list-group-item-text">Student</p>
+                                        </div><!-- /.list-group-item-body -->
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="message-files" class="tab-pane fade" role="tabpanel" aria-labelledby="message-files">
+
+                            @foreach (var projectStudent in Model.FinalProjectStudents)
+                            {
+
+                                foreach (var document in projectStudent.StudentDocuments)
+                                {
+                                    if (document.Message != null || document.Attachement != null)
+                                    {
+                                        <div class="list-group list-group-reflow list-group-flush list-group-divider">
+                                            <div class="list-group-item align-items-start">
+                                                <div class="list-group-item-figure">
+                                                    <a href="#" class="tile tile-circle bg-teal"><span class="fa fa-file-pdf"></span></a>
+
+                                                    <div class="list-group-item-body">
+                                                        <h4 class="list-group-item-title text-truncate">
+                                                            <a href="#">@document.DocumentTitle</a>
+                                                        </h4>
+                                                        <p class="list-group-item-text text-md-left"> by @document.FinalProjectStudent.Student.FirstName </p>
+                                                        <p class="list-group-item-text small text-md-left"> @document.UploadDate </p>
+                                                    </div>
+
+                                                    <div class="list-group-item-figure">
+                                                        <!-- .dropdown -->
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <div class="dropdown-arrow mr-n1"></div><button type="button" class="dropdown-item">Download</button> <button type="button" class="dropdown-item">View details</button> <button type="button" class="dropdown-item">Share file</button> <button type="button" class="dropdown-item">Copy link file</button>
+                                                                <div class="dropdown-divider"></div><button type="button" class="dropdown-item">Remove</button>
+                                                            </div>
+                                                        </div><!-- /.dropdown -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+
+                            @foreach (var projectStudent in Model.FinalProjectAdvisors)
+                            {
+
+                                foreach (var document in projectStudent.AdvisorDocuments)
+                                {
+                                    if (document.Message != null || document.Attachement != null)
+                                    {
+                                        <div class="list-group list-group-reflow list-group-flush list-group-divider">
+                                            <div class="list-group-item align-items-start">
+                                                <div class="list-group-item-figure">
+                                                    <a href="#" class="tile tile-circle bg-teal"><span class="fa fa-file-pdf"></span></a>
+
+                                                    <div class="list-group-item-body">
+                                                        <h4 class="list-group-item-title text-truncate">
+                                                            <a href="#">@document.DocumentTitle</a>
+                                                        </h4>
+                                                        <p class="list-group-item-text text-md-left"> by @document.FinalProjectAdvisor.Instructor.FirstName </p>
+                                                        <p class="list-group-item-text small text-md-left"> @document.UploadDate </p>
+                                                    </div>
+
+                                                    <div class="list-group-item-figure">
+                                                        <!-- .dropdown -->
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <div class="dropdown-arrow mr-n1"></div><button type="button" class="dropdown-item">Download</button> <button type="button" class="dropdown-item">View details</button> <button type="button" class="dropdown-item">Share file</button> <button type="button" class="dropdown-item">Copy link file</button>
+                                                                <div class="dropdown-divider"></div><button type="button" class="dropdown-item">Remove</button>
+                                                            </div>
+                                                        </div><!-- /.dropdown -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
