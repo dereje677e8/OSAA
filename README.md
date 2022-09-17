@@ -21,4 +21,12 @@ HEAD HOME PAGE
 
 Front Page
 ![image](https://user-images.githubusercontent.com/69731494/190857882-b2fe15b7-b449-42b0-95c0-c7de45b7bf50.png)
+INSTRUCTOR PAGE
+![image](https://user-images.githubusercontent.com/69731494/190859410-b096f87b-ec27-4319-bced-9a98390dcc49.png)
+PROJECT CHAT PAGE
+![image](https://user-images.githubusercontent.com/69731494/190859476-2f27442d-a310-40da-8178-d86ae3caf29e.png)
+STUDENT HOME PAGE
+![image](https://user-images.githubusercontent.com/69731494/190859526-e1e817f6-b33f-4caf-882a-8c46a1501136.png)
+
+
 
